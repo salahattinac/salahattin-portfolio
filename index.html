@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salahattin Açıkgöz | Yazılım Geliştirici & RPA Uzmanı</title>
+    <meta name="description" content="Salahattin Açıkgöz - Yazılım Geliştirici, Web Geliştirme, API Entegrasyonları, Veritabanı Tasarımı ve RPA Otomasyonu Portföyü">
+    
+    <!-- Google Fonts: Inter / Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        yellowBtn: '#facc15',
+                        yellowHover: '#eab308'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white font-sans antialiased selection:bg-yellow-400 selection:text-black min-h-screen relative overflow-x-hidden">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Header Navigation (Minimalist Floating Glass Bar) -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-black/60 backdrop-blur-md border-b border-white/10 px-6 sm:px-12 h-16 flex items-center justify-between">
+        <a href="#hero" id="brand-name" class="text-lg font-bold tracking-tight hover:text-yellow-400 transition-colors">
+            Salahattin Açıkgöz
+        </a>
+
+        <!-- Nav Links -->
+        <nav class="hidden md:flex items-center gap-6 text-sm text-gray-300">
+            <a href="#hero" id="nav-link-hero" class="nav-link text-white font-medium hover:text-yellow-400 transition-colors">Ana Sayfa</a>
+            <a href="#hakkimda" id="nav-link-about" class="nav-link hover:text-yellow-400 transition-colors">Hakkımda</a>
+            <a href="#yetenekler" id="nav-link-skills" class="nav-link hover:text-yellow-400 transition-colors">Yetenekler</a>
+            <a href="#deneyimler" id="nav-link-experience" class="nav-link hover:text-yellow-400 transition-colors">Deneyimler</a>
+            <a href="#projeler" id="nav-link-projects" class="nav-link hover:text-yellow-400 transition-colors">Projeler</a>
+            <a href="#iletisim" id="nav-link-contact" class="nav-link hover:text-yellow-400 transition-colors">İletişim</a>
+        </nav>
+
+        <!-- Status, Language Switcher & Contact Action -->
+        <div class="flex items-center gap-3">
+            <!-- Dual Language Toggle Pill -->
+            <div class="flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 text-xs">
+                <button id="lang-btn-tr" type="button" class="px-2.5 py-1 rounded-full text-black bg-yellow-400 font-bold transition-all cursor-pointer" title="Türkçe">TR</button>
+                <button id="lang-btn-en" type="button" class="px-2.5 py-1 rounded-full text-gray-400 hover:text-white font-medium transition-all cursor-pointer" title="English">EN</button>
+            </div>
+            <a href="#iletisim" id="nav-contact-btn" class="px-4 py-1.5 text-xs font-semibold rounded-full bg-yellow-400 text-black hover:bg-yellow-300 transition-all">
+                İletişime Geç
+            </a>
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="hero" class="snap-section h-screen min-h-screen w-full flex flex-col items-center justify-center px-6 sm:px-12 pt-16 relative text-center">
+        <!-- Ambient Background Glow (Centered) -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-yellow-400/5 rounded-full blur-[160px] pointer-events-none"></div>
+
+        <div class="max-w-4xl w-full mx-auto relative z-10 flex flex-col items-center space-y-7">
+            <!-- Main Huge Name Header -->
+            <div class="space-y-3">
+                <h1 id="hero-name" class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white leading-tight">
+                    Salahattin Açıkgöz
+                </h1>
+
+                <!-- Typewriter / Animated Subtitle -->
+                <div class="text-xl sm:text-3xl text-gray-300 font-medium flex items-center justify-center gap-2">
+                    <span class="text-gray-400" id="hero-typewriter-prefix">Ben bir</span>
+                    <span id="typed-text" class="font-bold text-yellow-400 border-b-2 border-yellow-400 py-0.5">Yazılım Geliştirici</span>
+                </div>
+            </div>
+
+            <!-- Bio Description -->
+            <p id="hero-bio" class="text-gray-400 text-base sm:text-xl leading-relaxed max-w-2xl mx-auto">
+                Web Geliştirme, API Entegrasyonları, Veritabanı Tasarımı ve RPA Otomasyonu alanlarında <span class="text-yellow-400 font-semibold">yüksek performanslı</span> ve modern dijital çözümler üretiyorum.
+            </p>
+
+            <!-- Action Button & Social Links -->
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-1">
+                <!-- Direct Download Resume Button -->
+                <a href="assets/cv/salahattin-acikgoz-cv.pdf" download="Salahattin_Acikgoz_CV.pdf" id="hero-cv-btn" class="px-8 py-3.5 rounded-full bg-yellow-400 text-black font-bold text-sm hover:bg-yellow-300 transition-all shadow-lg shadow-yellow-400/20 flex items-center gap-2 cursor-pointer" title="CV İndir (PDF)">
+                    <span id="hero-cv-btn-text">CV İndir</span>
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                </a>
+
+                <!-- Social Icons -->
+                <div class="flex items-center gap-3">
+                    <!-- GitHub -->
+                    <a href="https://github.com/salahattin-acikgoz" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub" id="hero-github-link" class="p-3 rounded-full bg-white/10 text-gray-300 hover:text-white hover:bg-white/20 transition-all flex items-center justify-center">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://linkedin.com/in/salahattin-acikgoz" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn" id="hero-linkedin-link" class="p-3 rounded-full bg-white/10 text-gray-300 hover:text-white hover:bg-white/20 transition-all flex items-center justify-center">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.5a1.63 1.63 0 0 0-1.63 1.63c0 .9.73 1.63 1.63 1.63s1.63-.73 1.63-1.63A1.63 1.63 0 0 0 7.86 6.5z"/>
+                        </svg>
+                    </a>
+                    <!-- Email -->
+                    <button id="copy-email-btn" data-email="salahattin.acikgoz@example.com" title="E-postayı Kopyala" class="p-3 rounded-full bg-white/10 text-gray-300 hover:text-white hover:bg-white/20 transition-all flex items-center justify-center cursor-pointer">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quote Line -->
+            <div id="hero-quote" class="pt-2 text-xs sm:text-sm italic text-gray-500 max-w-lg mx-auto">
+                "Turning lines of code into digital experiences that inspire and innovate."
+            </div>
+
+            <!-- Scroll Indicator Button -->
+            <a href="#hakkimda" class="pt-2 flex flex-col items-center gap-1 text-gray-500 hover:text-yellow-400 transition-colors group cursor-pointer">
+                <span id="hero-scroll-text" class="text-[10px] font-mono tracking-widest uppercase">Hakkımda Keşfet</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 animate-bounce group-hover:translate-y-0.5 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= HAKKIMDA ================= -->
+    <section id="hakkimda" class="snap-section min-h-screen w-full flex flex-col justify-center px-6 sm:px-12 pt-20 pb-12 border-t border-white/10 max-w-7xl mx-auto">
+        
+        <!-- Hakkımda Profil & Biyografi -->
+        <div class="space-y-8">
+            <div class="space-y-4">
+                <h2 id="about-section-title" class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Hakkımda</h2>
+                
+                <!-- Role / Title Banner as Requested -->
+                <div id="about-badges-container" class="flex flex-wrap items-center gap-2 pt-1 text-xs sm:text-sm">
+                    <span class="px-3.5 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 font-semibold">
+                        Yazılım Geliştirici
+                    </span>
+                    <span class="text-yellow-400/40">•</span>
+                    <span class="px-3.5 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 font-medium">
+                        Web Geliştirme, API Entegrasyonları ve Veritabanı Tasarımı
+                    </span>
+                    <span class="text-yellow-400/40">•</span>
+                    <span class="px-3.5 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 font-semibold">
+                        Robotik Süreç Otomasyonu (RPA)
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bento Bio Card -->
+            <div class="p-8 sm:p-10 rounded-3xl bg-zinc-900/40 border border-white/10 relative overflow-hidden">
+                <div class="absolute -top-24 -right-24 w-80 h-80 bg-yellow-400/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="max-w-4xl space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed relative z-10">
+                    <p id="about-p1">
+                        Merhaba! Ben <strong class="text-white font-bold">Salahattin Açıkgöz</strong>. Teknolojiye ve kodlamaya olan tutkumu; kullanıcı odaklı modern web platformları, kesintisiz kurumsal API veri haberleşmesi, yüksek hacimli SQL veritabanı mimarisi ve 7/24 otonom çalışan Robotik Süreç Otomasyonu (RPA) çözümleriyle birleştiriyorum.
+                    </p>
+                    <p id="about-p2">
+                        Tekrarlayan operasyonel iş yüklerini <span class="text-yellow-400 font-semibold">UiPath</span> ve <span class="text-yellow-400 font-semibold">Python</span> botlarıyla sıfır hataya indirmek, farklı sistemler arasında güvenli <span class="text-cyan-400 font-semibold">REST/SOAP API</span> köprüleri kurmak ve büyük veri kümelerinde milisaniyeler içinde yanıt veren <span class="text-purple-400 font-semibold">SQL mimarileri</span> tasarlamak üzerine uzmanlaştım.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= YETENEKLER ================= -->
+    <section id="yetenekler" class="snap-section min-h-screen w-full flex flex-col justify-center px-6 sm:px-12 pt-20 pb-12 border-t border-white/10 max-w-7xl mx-auto space-y-8 overflow-hidden">
+        <div class="text-center">
+            <h2 id="skills-section-title" class="text-3xl sm:text-5xl font-extrabold text-white">Teknolojiler & Araçlar</h2>
+        </div>
+
+        <!-- Marquee Row 1 (Left Scrolling) -->
+        <div class="marquee-container">
+            <div class="marquee-track" id="marquee-track-1">
+                <!-- Group A -->
+                <div class="tech-logo-card" data-tech="python">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Python</span>
+                </div>
+                <div class="tech-logo-card" data-tech="uipath">
+                    <svg class="tech-icon" viewBox="0 0 24 24" fill="#FA4616"><title>UiPath</title><path d="M0 7.882v8.235h8.235V7.882H0Zm.852.852h6.53v6.53H.852v-6.53Zm22.268.695c-.514 0-.886.345-.886.873 0 .511.36.878.886.878.518 0 .88-.359.88-.878 0-.521-.359-.873-.88-.873Zm-17.023.055a.501.501 0 0 0-.522.522c0 .302.22.509.522.509.302 0 .522-.206.522-.509a.501.501 0 0 0-.522-.522Zm17.023.102c.437 0 .716.278.716.716 0 .426-.274.712-.716.712-.426 0-.719-.271-.719-.712 0-.44.278-.716.719-.716Zm-.347.213v.988h.197v-.318h.14l.176.318h.22l-.186-.347a.32.32 0 0 0 .206-.311c0-.203-.159-.33-.374-.33h-.379Zm-3.74.002v4.468h.853v-1.774c0-.571.302-.914.804-.914s.763.33.763.838v1.85h.852v-1.946c0-.88-.619-1.45-1.409-1.45-.509 0-.818.192-1.01.515V9.801h-.853Zm3.937.157h.157c.115 0 .193.064.193.171 0 .118-.078.181-.193.181h-.157v-.352Zm-21.375.049v2.495c0 1.141.625 1.808 1.684 1.808 1.079 0 1.718-.681 1.718-1.808v-2.495h-.852v2.495c0 .646-.275 1.004-.846 1.004-.591 0-.852-.378-.852-1.004v-2.495h-.852Zm7.547 0v4.262h.852v-1.375h.77c.928 0 1.533-.543 1.533-1.457 0-.88-.591-1.43-1.533-1.43H9.142Zm7.809 0v.914h-.399v.722h.399v1.45c0 .791.35 1.176 1.161 1.176h.447v-.729h-.337c-.33 0-.419-.144-.419-.44v-1.457h.749v-.722h-.749v-.914h-.852Zm-6.957.687h.681c.488 0 .756.276.756.743 0 .502-.268.776-.756.776h-.681v-1.519Zm4.138.186c-.921 0-1.546.728-1.546 1.718 0 .997.639 1.712 1.546 1.712.537 0 .887-.193 1.086-.516v.475h.853v-3.348h-.853v.523c-.206-.344-.563-.564-1.086-.564Zm-8.461.041v3.348h.852v-3.348h-.852Zm8.661.701c.543 0 .886.399.886.976 0 .585-.364.963-.886.963-.578 0-.88-.406-.88-.963 0-.598.337-.976.88-.976Z"/></svg>
+                    <span class="text-sm font-semibold text-white">UiPath RPA</span>
+                </div>
+                <div class="tech-logo-card" data-tech="csharp">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" alt="C#" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">C#</span>
+                </div>
+                <div class="tech-logo-card" data-tech="dotnet">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dot-net/dot-net-original.svg" alt=".NET Core" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">.NET Core</span>
+                </div>
+                <div class="tech-logo-card" data-tech="mssql">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg" alt="MS SQL Server" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">MS SQL Server</span>
+                </div>
+                <div class="tech-logo-card" data-tech="postgresql">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">PostgreSQL</span>
+                </div>
+                <div class="tech-logo-card" data-tech="docker">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Docker</span>
+                </div>
+
+                <!-- Group B (Duplicate for seamless infinite scroll) -->
+                <div class="tech-logo-card" data-tech="python" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Python</span>
+                </div>
+                <div class="tech-logo-card" data-tech="uipath" aria-hidden="true">
+                    <svg class="tech-icon" viewBox="0 0 24 24" fill="#FA4616"><title>UiPath</title><path d="M0 7.882v8.235h8.235V7.882H0Zm.852.852h6.53v6.53H.852v-6.53Zm22.268.695c-.514 0-.886.345-.886.873 0 .511.36.878.886.878.518 0 .88-.359.88-.878 0-.521-.359-.873-.88-.873Zm-17.023.055a.501.501 0 0 0-.522.522c0 .302.22.509.522.509.302 0 .522-.206.522-.509a.501.501 0 0 0-.522-.522Zm17.023.102c.437 0 .716.278.716.716 0 .426-.274.712-.716.712-.426 0-.719-.271-.719-.712 0-.44.278-.716.719-.716Zm-.347.213v.988h.197v-.318h.14l.176.318h.22l-.186-.347a.32.32 0 0 0 .206-.311c0-.203-.159-.33-.374-.33h-.379Zm-3.74.002v4.468h.853v-1.774c0-.571.302-.914.804-.914s.763.33.763.838v1.85h.852v-1.946c0-.88-.619-1.45-1.409-1.45-.509 0-.818.192-1.01.515V9.801h-.853Zm3.937.157h.157c.115 0 .193.064.193.171 0 .118-.078.181-.193.181h-.157v-.352Zm-21.375.049v2.495c0 1.141.625 1.808 1.684 1.808 1.079 0 1.718-.681 1.718-1.808v-2.495h-.852v2.495c0 .646-.275 1.004-.846 1.004-.591 0-.852-.378-.852-1.004v-2.495h-.852Zm7.547 0v4.262h.852v-1.375h.77c.928 0 1.533-.543 1.533-1.457 0-.88-.591-1.43-1.533-1.43H9.142Zm7.809 0v.914h-.399v.722h.399v1.45c0 .791.35 1.176 1.161 1.176h.447v-.729h-.337c-.33 0-.419-.144-.419-.44v-1.457h.749v-.722h-.749v-.914h-.852Zm-6.957.687h.681c.488 0 .756.276.756.743 0 .502-.268.776-.756.776h-.681v-1.519Zm4.138.186c-.921 0-1.546.728-1.546 1.718 0 .997.639 1.712 1.546 1.712.537 0 .887-.193 1.086-.516v.475h.853v-3.348h-.853v.523c-.206-.344-.563-.564-1.086-.564Zm-8.461.041v3.348h.852v-3.348h-.852Zm8.661.701c.543 0 .886.399.886.976 0 .585-.364.963-.886.963-.578 0-.88-.406-.88-.963 0-.598.337-.976.88-.976Z"/></svg>
+                    <span class="text-sm font-semibold text-white">UiPath RPA</span>
+                </div>
+                <div class="tech-logo-card" data-tech="csharp" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" alt="C#" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">C#</span>
+                </div>
+                <div class="tech-logo-card" data-tech="dotnet" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dot-net/dot-net-original.svg" alt=".NET Core" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">.NET Core</span>
+                </div>
+                <div class="tech-logo-card" data-tech="mssql" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg" alt="MS SQL Server" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">MS SQL Server</span>
+                </div>
+                <div class="tech-logo-card" data-tech="postgresql" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">PostgreSQL</span>
+                </div>
+                <div class="tech-logo-card" data-tech="docker" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Docker</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marquee Row 2 (Right / Reverse Scrolling) -->
+        <div class="marquee-container">
+            <div class="marquee-track-reverse" id="marquee-track-2">
+                <!-- Group A -->
+                <div class="tech-logo-card" data-tech="rest">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" alt="REST API" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">RESTful API</span>
+                </div>
+                <div class="tech-logo-card" data-tech="selenium">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/selenium/selenium-original.svg" alt="Selenium" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Selenium & OCR</span>
+                </div>
+                <div class="tech-logo-card" data-tech="javascript">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">JavaScript (ES6+)</span>
+                </div>
+                <div class="tech-logo-card" data-tech="tailwind">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Tailwind CSS</span>
+                </div>
+                <div class="tech-logo-card" data-tech="html5">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">HTML5 & CSS3</span>
+                </div>
+                <div class="tech-logo-card" data-tech="git">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Git & GitHub</span>
+                </div>
+                <div class="tech-logo-card" data-tech="soap">
+                    <div class="w-8 h-8 rounded-lg bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center font-mono font-bold text-xs">
+                        &lt;/&gt;
+                    </div>
+                    <span class="text-sm font-semibold text-white">SOAP / XML Servisleri</span>
+                </div>
+
+                <!-- Group B (Duplicate for seamless infinite scroll) -->
+                <div class="tech-logo-card" data-tech="rest" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" alt="REST API" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">RESTful API</span>
+                </div>
+                <div class="tech-logo-card" data-tech="selenium" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/selenium/selenium-original.svg" alt="Selenium" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Selenium & OCR</span>
+                </div>
+                <div class="tech-logo-card" data-tech="javascript" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">JavaScript (ES6+)</span>
+                </div>
+                <div class="tech-logo-card" data-tech="tailwind" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Tailwind CSS</span>
+                </div>
+                <div class="tech-logo-card" data-tech="html5" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">HTML5 & CSS3</span>
+                </div>
+                <div class="tech-logo-card" data-tech="git" aria-hidden="true">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" class="tech-icon" loading="lazy">
+                    <span class="text-sm font-semibold text-white">Git & GitHub</span>
+                </div>
+                <div class="tech-logo-card" data-tech="soap" aria-hidden="true">
+                    <div class="w-8 h-8 rounded-lg bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center font-mono font-bold text-xs">
+                        &lt;/&gt;
+                    </div>
+                    <span class="text-sm font-semibold text-white">SOAP / XML Servisleri</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DENEYİMLER ================= -->
+    <section id="deneyimler" class="snap-section min-h-screen w-full flex flex-col justify-center px-6 sm:px-12 pt-20 pb-12 border-t border-white/10 max-w-7xl mx-auto space-y-6">
+        <div>
+            <h2 id="exp-section-title" class="text-3xl sm:text-5xl font-extrabold text-white">İş Deneyimleri & Roller</h2>
+        </div>
+
+        <div class="w-full">
+            <!-- Experience Item 1: Real Experience -->
+            <div class="p-6 sm:p-8 rounded-3xl bg-zinc-950/80 border border-white/10 hover:border-yellow-400/50 transition-all space-y-5 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-24 -right-24 w-80 h-80 bg-yellow-400/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Header: Title & Dates -->
+                <div class="flex flex-wrap items-center justify-between gap-3 relative z-10">
+                    <div>
+                        <h3 id="exp-role" class="text-xl sm:text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors">
+                            Yazılım Geliştirme & RPA Stajyeri
+                        </h3>
+                        <div class="text-sm font-medium text-gray-400 flex items-center gap-2 mt-1">
+                            <i data-lucide="building-2" class="w-4 h-4 text-yellow-400"></i>
+                            <span id="exp-company" class="text-gray-200 font-semibold">Asbank</span>
+                            <span class="text-gray-500">•</span>
+                            <span id="exp-dept" class="text-gray-400">Bankacılık & Finans Teknolojileri</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-xs font-mono text-yellow-400 font-bold">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span id="exp-period">2024 – Günümüz</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <p id="exp-desc" class="text-sm text-gray-300 leading-relaxed relative z-10">
+                    Bankanın dijital dönüşüm süreçlerine destek sağlanan staj programında; web sitesi yeniden yapılandırma, chatbot entegrasyonu, sözleşme/lisans takip portalı geliştirme ve RPA çalışmaları yürütülmüştür. Tekrarlayan iş süreçlerinin otomatizasyonu, veri tabanı tasarımı ve frontend-backend entegrasyonlarında aktif görev alınmıştır.
+                </p>
+
+                <!-- Key Pillars / Focus Areas -->
+                <div id="exp-pillars-container" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1 relative z-10">
+                    <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3 hover:border-yellow-400/30 hover:bg-yellow-400/[0.02] transition-all">
+                        <div class="w-8 h-8 rounded-xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center flex-shrink-0 text-yellow-400">
+                            <i data-lucide="bot" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs sm:text-sm font-bold text-white block">RPA & Süreç Otomasyonu</span>
+                            <span class="text-xs text-gray-400 mt-0.5 block leading-relaxed">Tekrarlayan bankacılık ve veri aktarım operasyonlarının otonom botlarla sıfır hata payıyla kurgulanması.</span>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3 hover:border-yellow-400/30 hover:bg-yellow-400/[0.02] transition-all">
+                        <div class="w-8 h-8 rounded-xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center flex-shrink-0 text-yellow-400">
+                            <i data-lucide="globe" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs sm:text-sm font-bold text-white block">Web & API Entegrasyonu</span>
+                            <span class="text-xs text-gray-400 mt-0.5 block leading-relaxed">Kurumsal web platformunun modernizasyonu, RESTful API bağlantıları ve slider mimarisi.</span>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3 hover:border-yellow-400/30 hover:bg-yellow-400/[0.02] transition-all">
+                        <div class="w-8 h-8 rounded-xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center flex-shrink-0 text-yellow-400">
+                            <i data-lucide="database" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs sm:text-sm font-bold text-white block">Veritabanı & Portal Mimarisi</span>
+                            <span class="text-xs text-gray-400 mt-0.5 block leading-relaxed">MS SQL üzerinde ilişkisel şema tasarımı ve sözleşme/lisans takip sistemi modellemesi.</span>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3 hover:border-yellow-400/30 hover:bg-yellow-400/[0.02] transition-all">
+                        <div class="w-8 h-8 rounded-xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center flex-shrink-0 text-yellow-400">
+                            <i data-lucide="message-square" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs sm:text-sm font-bold text-white block">Akıllı Chatbot Entegrasyonu</span>
+                            <span class="text-xs text-gray-400 mt-0.5 block leading-relaxed">Kullanıcı deneyimi odaklı ön yüz (UI) ve servis katmanıyla asenkron haberleşme köprüsü.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tech Badges with Logos (Centered) -->
+                <div id="exp-tech-container" class="flex flex-wrap items-center justify-center gap-2.5 pt-4 border-t border-white/5 relative z-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-yellow-400/40 hover:bg-yellow-400/[0.04] transition-all text-xs font-mono font-medium text-gray-200">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="w-4 h-4 object-contain flex-shrink-0" loading="lazy">
+                        <span>Python</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-yellow-400/40 hover:bg-yellow-400/[0.04] transition-all text-xs font-mono font-medium text-gray-200">
+                        <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="#FA4616"><title>UiPath</title><path d="M0 7.882v8.235h8.235V7.882H0Zm.852.852h6.53v6.53H.852v-6.53Zm22.268.695c-.514 0-.886.345-.886.873 0 .511.36.878.886.878.518 0 .88-.359.88-.878 0-.521-.359-.873-.88-.873Zm-17.023.055a.501.501 0 0 0-.522.522c0 .302.22.509.522.509.302 0 .522-.206.522-.509a.501.501 0 0 0-.522-.522Zm17.023.102c.437 0 .716.278.716.716 0 .426-.274.712-.716.712-.426 0-.719-.271-.719-.712 0-.44.278-.716.719-.716Zm-.347.213v.988h.197v-.318h.14l.176.318h.22l-.186-.347a.32.32 0 0 0 .206-.311c0-.203-.159-.33-.374-.33h-.379Zm-3.74.002v4.468h.853v-1.774c0-.571.302-.914.804-.914s.763.33.763.838v1.85h.852v-1.946c0-.88-.619-1.45-1.409-1.45-.509 0-.818.192-1.01.515V9.801h-.853Zm3.937.157h.157c.115 0 .193.064.193.171 0 .118-.078.181-.193.181h-.157v-.352Zm-21.375.049v2.495c0 1.141.625 1.808 1.684 1.808 1.079 0 1.718-.681 1.718-1.808v-2.495h-.852v2.495c0 .646-.275 1.004-.846 1.004-.591 0-.852-.378-.852-1.004v-2.495h-.852Zm7.547 0v4.262h.852v-1.375h.77c.928 0 1.533-.543 1.533-1.457 0-.88-.591-1.43-1.533-1.43H9.142Zm7.809 0v.914h-.399v.722h.399v1.45c0 .791.35 1.176 1.161 1.176h.447v-.729h-.337c-.33 0-.419-.144-.419-.44v-1.457h.749v-.722h-.749v-.914h-.852Zm-6.957.687h.681c.488 0 .756.276.756.743 0 .502-.268.776-.756.776h-.681v-1.519Zm4.138.186c-.921 0-1.546.728-1.546 1.718 0 .997.639 1.712 1.546 1.712.537 0 .887-.193 1.086-.516v.475h.853v-3.348h-.853v.523c-.206-.344-.563-.564-1.086-.564Zm-8.461.041v3.348h.852v-3.348h-.852Zm8.661.701c.543 0 .886.399.886.976 0 .585-.364.963-.886.963-.578 0-.88-.406-.88-.963 0-.598.337-.976.88-.976Z"/></svg>
+                        <span>RPA Araçları (UiPath vb.)</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-yellow-400/40 hover:bg-yellow-400/[0.04] transition-all text-xs font-mono font-medium text-gray-200">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg" alt="MS SQL" class="w-4 h-4 object-contain flex-shrink-0" loading="lazy">
+                        <span>MS SQL</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-yellow-400/40 hover:bg-yellow-400/[0.04] transition-all text-xs font-mono font-medium text-gray-200">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" alt="REST API" class="w-4 h-4 object-contain flex-shrink-0" loading="lazy">
+                        <span>REST API</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-yellow-400/40 hover:bg-yellow-400/[0.04] transition-all text-xs font-mono font-medium text-gray-200">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-4 h-4 object-contain flex-shrink-0" loading="lazy">
+                        <span>JavaScript (ES6+)</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-yellow-400/40 hover:bg-yellow-400/[0.04] transition-all text-xs font-mono font-medium text-gray-200">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" class="w-4 h-4 object-contain flex-shrink-0" loading="lazy">
+                        <span>HTML5 & CSS3</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-yellow-400/40 hover:bg-yellow-400/[0.04] transition-all text-xs font-mono font-medium text-gray-200">
+                        <svg class="w-4 h-4 text-yellow-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                        <span>Veritabanı Yönetimi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PROJELER ================= -->
+    <section id="projeler" class="snap-section min-h-screen w-full flex flex-col justify-center px-6 sm:px-12 pt-20 pb-12 border-t border-white/10 max-w-7xl mx-auto space-y-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 id="projects-section-title" class="text-3xl sm:text-5xl font-extrabold text-white">Öne Çıkan Çalışmalar</h2>
+            </div>
+        </div>
+
+        <!-- Interactive Split Showcase -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            
+            <!-- Left: 4 Project Selector Tabs (lg:col-span-5) -->
+            <div class="lg:col-span-5 flex flex-col gap-3 justify-between lg:h-[480px]" id="project-tabs-container">
+                
+                <!-- Tab 1: Web Analizi -->
+                <button type="button" class="project-tab-btn active w-full p-4 rounded-2xl text-left transition-all duration-300 flex items-center justify-between group cursor-pointer flex-1" data-project="web-analiz">
+                    <div class="flex items-center gap-3.5">
+                        <div class="tab-icon-box w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JS" class="w-5 h-5 object-contain">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-mono text-yellow-400 font-bold">01 //</span>
+                                <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-yellow-400 transition-colors">Web Analizi & Modernizasyon</h3>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-0.5">Özel Slider Motoru & RESTful API</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="tab-arrow w-4 h-4 text-yellow-400 transition-transform group-hover:translate-x-1"></i>
+                </button>
+
+                <!-- Tab 2: Chatbot -->
+                <button type="button" class="project-tab-btn w-full p-4 rounded-2xl text-left transition-all duration-300 flex items-center justify-between group cursor-pointer flex-1" data-project="chatbot-entegrasyon">
+                    <div class="flex items-center gap-3.5">
+                        <div class="tab-icon-box w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                            <svg class="w-5 h-5 fill-[#10A37F]" viewBox="0 0 24 24">
+                                <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-mono text-yellow-400 font-bold">02 //</span>
+                                <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-yellow-400 transition-colors">Akıllı Chatbot Entegrasyonu</h3>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-0.5">Frontend & Asenkron API Altyapısı</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="tab-arrow w-4 h-4 text-gray-500 transition-transform group-hover:translate-x-1"></i>
+                </button>
+
+                <!-- Tab 3: Sözleşme Portalı -->
+                <button type="button" class="project-tab-btn w-full p-4 rounded-2xl text-left transition-all duration-300 flex items-center justify-between group cursor-pointer flex-1" data-project="sozlesme-portal">
+                    <div class="flex items-center gap-3.5">
+                        <div class="tab-icon-box w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg" alt="MS SQL Server" class="w-5 h-5 object-contain">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-mono text-yellow-400 font-bold">03 //</span>
+                                <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-yellow-400 transition-colors">Sözleşme & Lisans Portalı</h3>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-0.5">İlişkisel Veritabanı & Takip Sistemi</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="tab-arrow w-4 h-4 text-gray-500 transition-transform group-hover:translate-x-1"></i>
+                </button>
+
+                <!-- Tab 4: RPA Otomasyon -->
+                <button type="button" class="project-tab-btn w-full p-4 rounded-2xl text-left transition-all duration-300 flex items-center justify-between group cursor-pointer flex-1" data-project="rpa-otomasyon">
+                    <div class="flex items-center gap-3.5">
+                        <div class="tab-icon-box w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="w-5 h-5 object-contain">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-mono text-yellow-400 font-bold">04 //</span>
+                                <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-yellow-400 transition-colors">RPA Süreç Otomasyonu</h3>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-0.5">Otonom Botlar & Sıfır Hata Payı</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="tab-arrow w-4 h-4 text-gray-500 transition-transform group-hover:translate-x-1"></i>
+                </button>
+            </div>
+
+            <!-- Right: Active Project Showcase Card (lg:col-span-7) -->
+            <div class="lg:col-span-7 p-6 sm:p-7 rounded-3xl bg-zinc-950/90 border border-white/10 relative overflow-hidden flex flex-col justify-between shadow-2xl transition-opacity duration-200 lg:h-[480px] min-h-[480px]" id="showcase-card">
+                
+                <!-- Ambient Glow inside Showcase Card -->
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-yellow-400/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="space-y-3.5 relative z-10">
+                    <!-- Top Category Badge -->
+                    <div class="flex items-center justify-between h-6">
+                        <span id="showcase-category" class="px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-xs font-semibold">
+                            Web & Arayüz Mimarisi
+                        </span>
+                    </div>
+
+                    <!-- Title & Subtitle -->
+                    <div class="h-[54px] flex flex-col justify-center">
+                        <h3 id="showcase-title" class="text-xl sm:text-2xl font-extrabold text-white truncate">
+                            Web Sitesi Analizi ve Geliştirme
+                        </h3>
+                        <p id="showcase-subtitle" class="text-xs text-yellow-400/80 font-medium truncate mt-0.5">
+                            Kurumsal Web Platformu Analizi, API Entegrasyonları & Slider Mimarisi
+                        </p>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="h-[62px] overflow-hidden flex items-center">
+                        <p id="showcase-summary" class="text-xs sm:text-sm text-gray-300 leading-relaxed line-clamp-3">
+                            Kurumsal web platformunun kullanıcı akışları ve sayfa performans analizleri gerçekleştirildi. Modern standartları karşılamak üzere sayfalar yeniden yapılandırıldı; dinamik veri akışları için RESTful API entegrasyonları kuruldu ve kod bazlı özel slider bileşenleri geliştirilerek ziyaretçi etkileşimi en üst seviyeye taşındı.
+                        </p>
+                    </div>
+
+                    <!-- Key Contributions / Pillars -->
+                    <div class="h-[92px] overflow-hidden flex flex-col justify-between pt-2.5 border-t border-white/5" id="showcase-points">
+                        <div class="flex items-center gap-2 text-xs text-gray-300">
+                            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-yellow-400 flex-shrink-0"></i>
+                            <span class="truncate">Kurumsal web arayüzünün frontend mimarisinin ve sayfa kullanıcı akışlarının detaylı teknik analizi</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-300">
+                            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-yellow-400 flex-shrink-0"></i>
+                            <span class="truncate">Dinamik içerik sunumu ve servis iletişimi için RESTful API entegrasyonlarının kurulması</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-300">
+                            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-yellow-400 flex-shrink-0"></i>
+                            <span class="truncate">Saf kod kullanılarak responsive, yüksek performanslı ve akıcı slider bileşenlerinin sıfırdan geliştirilmesi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom: Tech Stack Marquee (Dönen & Logolu) -->
+                <div class="pt-3 border-t border-white/5 relative z-10">
+                    <div class="text-[11px] font-mono text-gray-400 mb-2 flex items-center gap-1.5">
+                        <i data-lucide="layers" class="w-3.5 h-3.5 text-yellow-400"></i>
+                        <span>Kullanılan Teknolojiler & Mimariler</span>
+                    </div>
+                    <div class="showcase-tech-marquee-container overflow-hidden relative w-full h-[46px] flex items-center">
+                        <div class="showcase-tech-marquee-track flex gap-2.5 items-center" id="showcase-tech">
+                            <!-- Injected dynamically with icons and duplicated for seamless infinite rotation -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= İLETİŞİM ================= -->
+    <section id="iletisim" class="snap-section min-h-screen w-full flex flex-col justify-center px-6 sm:px-12 pt-20 pb-12 border-t border-white/10 max-w-7xl mx-auto space-y-7">
+        
+        <!-- Üst Başlık & Rozet -->
+        <div class="max-w-2xl mx-auto text-center space-y-2.5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-xs font-semibold tracking-wider uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
+                <span id="contact-section-badge">İletişim & İş Birliği</span>
+            </div>
+            <h2 id="contact-section-title" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+                Yeni Bir Fikri Birlikte Hayata Geçirelim
+            </h2>
+            <p id="contact-section-subtitle" class="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
+                RPA süreç otomasyonu, modern web geliştirme, API mimarisi ve kurumsal yazılım projeleriniz için doğrudan iletişime geçebilirsiniz.
+            </p>
+        </div>
+
+        <!-- 2 Sütunlu Executive Bento Düzeni -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch w-full max-w-6xl mx-auto">
+            
+            <!-- Sol Kolon: Doğrudan Kanallar & Durum Hub'ı (lg:col-span-5) -->
+            <div class="lg:col-span-5 flex flex-col justify-between space-y-3.5">
+                
+                <!-- Canlı Çalışma Durumu Kartı -->
+                <div class="glass-card p-5 rounded-2xl border border-white/10 relative overflow-hidden group">
+                    <div class="absolute -right-8 -top-8 w-28 h-28 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all pointer-events-none"></div>
+                    <div class="flex items-center gap-2.5 mb-2">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        </span>
+                        <span id="contact-status-badge" class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Aktif & Müsait</span>
+                    </div>
+                    <h3 id="contact-status-title" class="text-base font-bold text-white mb-1">Yeni Projelere & Fırsatlara Açık</h3>
+                    <p id="contact-status-desc" class="text-xs text-gray-400 leading-relaxed">
+                        Bankacılık & finans teknolojileri, kurumsal RPA botları ve uçtan uca modern web geliştirme süreçlerinde değer katmaya hazırım.
+                    </p>
+                </div>
+
+                <!-- İletişim Kanalları -->
+                <div class="space-y-2.5">
+                    <!-- E-posta Kartı -->
+                    <div class="glass-card p-3.5 rounded-xl border border-white/10 flex items-center justify-between gap-3 hover:border-yellow-400/30 transition-all">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 rounded-lg bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center text-yellow-400 flex-shrink-0">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <div class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">E-posta</div>
+                                <div id="contact-email-val" class="text-xs sm:text-sm font-semibold text-white truncate">salahattin.acikgoz@example.com</div>
+                            </div>
+                        </div>
+                        <button id="copy-contact-email" data-email="salahattin.acikgoz@example.com" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-yellow-400 hover:text-black border border-white/10 text-xs font-semibold text-gray-300 transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer" title="E-postayı Kopyala">
+                            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                            <span class="hidden sm:inline">Kopyala</span>
+                        </button>
+                    </div>
+
+                    <!-- LinkedIn Kartı -->
+                    <a id="contact-linkedin-link" href="https://linkedin.com/in/salahattin-acikgoz" target="_blank" rel="noopener" class="glass-card p-3.5 rounded-xl border border-white/10 flex items-center justify-between gap-3 hover:border-blue-500/40 transition-all group">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.5a1.63 1.63 0 0 0-1.63 1.63c0 .9.73 1.63 1.63 1.63s1.63-.73 1.63-1.63A1.63 1.63 0 0 0 7.86 6.5z"/>
+                                </svg>
+                            </div>
+                            <div class="min-w-0">
+                                <div class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">LinkedIn</div>
+                                <div id="contact-linkedin-val" class="text-xs sm:text-sm font-semibold text-white group-hover:text-blue-400 transition-colors truncate">linkedin.com/in/salahattin-acikgoz</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-gray-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all flex-shrink-0"></i>
+                    </a>
+
+                    <!-- GitHub Kartı -->
+                    <a id="contact-github-link" href="https://github.com/salahattin-acikgoz" target="_blank" rel="noopener" class="glass-card p-3.5 rounded-xl border border-white/10 flex items-center justify-between gap-3 hover:border-white/30 transition-all group">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 flex-shrink-0">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                </svg>
+                            </div>
+                            <div class="min-w-0">
+                                <div class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">GitHub</div>
+                                <div id="contact-github-val" class="text-xs sm:text-sm font-semibold text-white group-hover:text-yellow-400 transition-colors truncate">github.com/salahattin-acikgoz</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-gray-500 group-hover:text-yellow-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all flex-shrink-0"></i>
+                    </a>
+
+                    <!-- Lokasyon Kartı -->
+                    <div class="glass-card p-3.5 rounded-xl border border-white/10 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Lokasyon & Model</div>
+                            <div id="contact-location-val" class="text-xs sm:text-sm font-semibold text-white truncate">Kuzey Kıbrıs / Türkiye • Remote & Hibrit</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Güven & Yanıt Bildirimi -->
+                <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5 flex items-center gap-2.5 text-gray-400 text-xs">
+                    <i data-lucide="clock" class="w-4 h-4 text-yellow-400 flex-shrink-0"></i>
+                    <span id="contact-sla-val">Mesajlarınıza genellikle <strong class="text-white">en geç 24 saat içinde</strong> geri dönüş sağlanır.</span>
+                </div>
+
+            </div>
+
+            <!-- Sağ Kolon: Mesaj Gönderme Formu (lg:col-span-7) -->
+            <div class="lg:col-span-7">
+                <div class="glass-card p-6 sm:p-7 rounded-3xl border border-white/10 relative overflow-hidden">
+                    <!-- Ambient Glow -->
+                    <div class="absolute -right-20 -bottom-20 w-60 h-60 bg-yellow-400/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="mb-5 space-y-1">
+                        <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                            <span id="form-title">Hızlı Mesaj Gönderin</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                        </h3>
+                        <p id="form-subtitle" class="text-xs text-gray-400">
+                            Aşağıdaki formu doldurarak projenizin detaylarını veya sorularınızı iletebilirsiniz.
+                        </p>
+                    </div>
+
+                    <!-- Kapsam / Konu Hızlı Seçim Butonları -->
+                    <div class="mb-4">
+                        <label id="form-topic-label" class="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Hizmet / İlgi Alanı</label>
+                        <div class="flex flex-wrap gap-2" id="topic-chips">
+                            <button type="button" class="topic-chip active px-3 py-1.5 rounded-lg text-xs font-medium border transition-all cursor-pointer bg-yellow-400 text-black border-yellow-400 shadow-sm" data-topic="RPA & Otomasyon">
+                                RPA & Otomasyon
+                            </button>
+                            <button type="button" class="topic-chip px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 text-gray-300 hover:text-white hover:border-white/20 bg-white/5 transition-all cursor-pointer" data-topic="Web & API Entegrasyonu">
+                                Web & API Entegrasyonu
+                            </button>
+                            <button type="button" class="topic-chip px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 text-gray-300 hover:text-white hover:border-white/20 bg-white/5 transition-all cursor-pointer" data-topic="Veritabanı / SQL">
+                                Veritabanı / SQL
+                            </button>
+                            <button type="button" class="topic-chip px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 text-gray-300 hover:text-white hover:border-white/20 bg-white/5 transition-all cursor-pointer" data-topic="Genel Görüşme">
+                                Genel Görüşme
+                            </button>
+                        </div>
+                    </div>
+
+                    <form id="contact-form" class="space-y-3.5">
+                        <input type="hidden" id="selected-topic" name="topic" value="RPA & Otomasyon">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <!-- Ad Soyad -->
+                            <div class="space-y-1">
+                                <label id="label-name" class="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Adınız Soyadınız</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-500">
+                                        <i data-lucide="user" class="w-4 h-4"></i>
+                                    </div>
+                                    <input type="text" id="contact-name" required placeholder="Adınız Soyadınız" class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-black/40 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/30 transition-all">
+                                </div>
+                            </div>
+
+                            <!-- E-posta -->
+                            <div class="space-y-1">
+                                <label id="label-email" class="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider">E-posta Adresiniz</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-500">
+                                        <i data-lucide="mail" class="w-4 h-4"></i>
+                                    </div>
+                                    <input type="email" id="contact-email" required placeholder="ornek@alanadi.com" class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-black/40 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/30 transition-all">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Konu Başlığı -->
+                        <div class="space-y-1">
+                            <label id="label-subject" class="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Konu Başlığı</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-500">
+                                    <i data-lucide="layers" class="w-4 h-4"></i>
+                                </div>
+                                <input type="text" id="contact-subject" placeholder="Örn: RPA Süreç Analizi ve Otomasyon Talebi" class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-black/40 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/30 transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Mesaj -->
+                        <div class="space-y-1">
+                            <label id="label-message" class="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Mesajınız</label>
+                            <textarea id="contact-message" rows="3" required placeholder="Proje hedefleriniz, ihtiyaç duyduğunuz çözümler veya danışmak istedikleriniz..." class="w-full px-3.5 py-2.5 rounded-xl bg-black/40 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/30 transition-all resize-none"></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full py-3 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-sm transition-all shadow-lg shadow-yellow-400/10 hover:shadow-yellow-400/20 active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer">
+                            <span id="form-submit-btn-text">Mesaj Gönder</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+
+                        <div class="flex items-center justify-center gap-1.5 text-[11px] text-gray-500 pt-0.5">
+                            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-yellow-400/70"></i>
+                            <span id="form-privacy-text">Bilgileriniz üçüncü şahıslarla paylaşılmaz ve yalnızca iletişim için kullanılır.</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer-text" class="py-8 px-6 border-t border-white/10 text-center text-xs text-gray-500">
+        Salahattin Açıkgöz © 2026 • Portföy Web Sitesi
+    </footer>
+
+    <!-- ================= TECH DETAILS MODAL ================= -->
+    <div id="tech-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-300 opacity-0 pointer-events-none">
+        <div id="tech-modal-card" class="bg-zinc-900 border border-white/10 rounded-2xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl relative transform scale-95 transition-all duration-300">
+            <!-- Close Icon Button -->
+            <button id="close-tech-modal" aria-label="Kapat" class="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="flex items-center gap-4">
+                <div id="modal-icon-wrapper" class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 p-3 flex items-center justify-center flex-shrink-0">
+                    <!-- Icon dynamically injected -->
+                </div>
+                <div>
+                    <h3 id="modal-title" class="text-2xl font-extrabold text-white">Teknoloji Adı</h3>
+                    <span id="modal-category" class="text-xs font-mono text-yellow-400 uppercase tracking-wider">Kategori</span>
+                </div>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="space-y-4 text-sm leading-relaxed">
+                <!-- What Is Section -->
+                <div class="p-4 rounded-xl bg-black/40 border border-white/5 space-y-1.5">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <i data-lucide="info" class="w-4 h-4 text-yellow-400"></i>
+                        Nedir?
+                    </span>
+                    <p id="modal-what-is" class="text-gray-300">...</p>
+                </div>
+
+                <!-- Where I Used It Section -->
+                <div class="p-4 rounded-xl bg-black/40 border border-white/5 space-y-1.5">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <i data-lucide="code-2" class="w-4 h-4 text-cyan-400"></i>
+                        Nelerde Kullandım?
+                    </span>
+                    <p id="modal-usage" class="text-gray-300">...</p>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-2 flex items-center justify-between border-t border-white/5 text-xs text-gray-500">
+                <span>Kapatmak için dışarı tıklayabilir veya ESC'ye basabilirsiniz</span>
+                <button id="close-tech-modal-btn" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium transition-all">
+                    Kapat
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= EXPERTISE DETAILS MODAL ================= -->
+    <div id="expertise-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div id="expertise-modal-card" class="max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-3xl bg-zinc-950 border border-white/10 p-6 sm:p-8 shadow-2xl space-y-6 transform scale-95 transition-all duration-300 relative">
+            
+            <!-- Close Button -->
+            <button id="close-expertise-modal" class="absolute top-6 right-6 p-2.5 rounded-full bg-white/5 hover:bg-white/15 text-gray-400 hover:text-white transition-all cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="flex items-start gap-4 pr-10">
+                <div id="exp-modal-icon-wrapper" class="w-14 h-14 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 p-3 flex items-center justify-center flex-shrink-0 text-yellow-400">
+                    <!-- Icon dynamically injected -->
+                </div>
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span id="exp-modal-status" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
+                            Aktif Alan
+                        </span>
+                        <span id="exp-modal-code" class="text-xs font-mono text-gray-500">01 //</span>
+                    </div>
+                    <h3 id="exp-modal-title" class="text-2xl sm:text-3xl font-extrabold text-white">Uzmanlık Adı</h3>
+                    <p id="exp-modal-subtitle" class="text-xs sm:text-sm text-gray-400">Kısa açıklama alt başlık</p>
+                </div>
+            </div>
+
+            <!-- Modal Sections -->
+            <div class="space-y-5 text-sm">
+                <!-- 1. Philosophy & Approach -->
+                <div class="p-4 sm:p-5 rounded-2xl bg-zinc-900/60 border border-white/5 space-y-2">
+                    <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
+                        <i data-lucide="compass" class="w-4 h-4"></i>
+                        Mühendislik Yaklaşımı & Mimari
+                    </span>
+                    <p id="exp-modal-philosophy" class="text-gray-300 leading-relaxed text-xs sm:text-sm">...</p>
+                </div>
+
+                <!-- 2. Core Capabilities -->
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                        Kapsam & Temel Yetkinlikler
+                    </span>
+                    <div id="exp-modal-capabilities" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <!-- Injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- 3. Real World Case Study -->
+                <div class="p-4 sm:p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
+                    <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
+                        <i data-lucide="briefcase" class="w-4 h-4"></i>
+                        Örnek Vaka & Çözüm Senaryosu
+                    </span>
+                    <p id="exp-modal-case-study" class="text-gray-300 text-xs sm:text-sm leading-relaxed">...</p>
+                </div>
+
+                <!-- 4. Technologies & Tools -->
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
+                        <i data-lucide="layers" class="w-4 h-4 text-purple-400"></i>
+                        Kullanılan Teknolojiler & Araçlar
+                    </span>
+                    <div id="exp-modal-tech-stack" class="flex flex-wrap gap-2">
+                        <!-- Injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- 5. Metrics & Gains -->
+                <div id="exp-modal-metrics" class="grid grid-cols-3 gap-3 text-center">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/5">
+                <button id="close-expertise-modal-btn" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-all cursor-pointer">
+                    Kapat
+                </button>
+                <a href="#iletisim" id="exp-modal-contact-btn" class="px-5 py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black text-xs font-bold transition-all shadow-lg shadow-yellow-400/20 flex items-center gap-2">
+                    <span>Bu Alanda Proje Konuşalım</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PROJECT DETAILS MODAL ================= -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div id="project-modal-card" class="max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-3xl bg-zinc-950 border border-white/10 p-6 sm:p-8 shadow-2xl space-y-5 transform scale-95 transition-all duration-300 relative">
+            
+            <!-- Ambient Glow inside Modal -->
+            <div class="absolute -top-24 -right-24 w-80 h-80 bg-yellow-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Close Button -->
+            <button id="close-project-modal" aria-label="Kapat" class="absolute top-5 right-5 sm:top-6 sm:right-6 p-2.5 rounded-full bg-white/5 hover:bg-white/15 text-gray-400 hover:text-white transition-all cursor-pointer z-10 hover:rotate-90">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="flex items-start gap-4 pr-12 relative z-10">
+                <div id="proj-modal-icon-wrapper" class="w-14 h-14 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 p-2.5 flex items-center justify-center flex-shrink-0 shadow-lg shadow-yellow-400/5 text-yellow-400">
+                    <!-- Injected dynamically -->
+                </div>
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span id="proj-modal-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-yellow-400/10 text-yellow-400 border border-yellow-400/25">
+                            Kurumsal Çözüm
+                        </span>
+                        <span id="proj-modal-category" class="text-xs font-mono text-gray-400">Web & Arayüz</span>
+                    </div>
+                    <h3 id="proj-modal-title" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">Proje Başlığı</h3>
+                    <p id="proj-modal-subtitle" class="text-xs sm:text-sm text-yellow-400/80 font-medium">Proje alt başlığı</p>
+                </div>
+            </div>
+
+            <!-- Modal Body Sections -->
+            <div class="space-y-5 text-sm relative z-10">
+                <!-- 1. Executive Summary / Scope & Objective -->
+                <div class="p-4 sm:p-4.5 rounded-2xl bg-gradient-to-r from-yellow-400/[0.08] via-zinc-900/40 to-transparent border-l-2 border-yellow-400 border-y border-r border-white/5 space-y-1.5">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-yellow-400 flex items-center gap-1.5">
+                        <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+                        Proje Kapsamı & Mimari Amacı
+                    </span>
+                    <p id="proj-modal-summary" class="text-xs sm:text-sm text-gray-200 leading-relaxed font-normal">...</p>
+                </div>
+
+                <!-- 2. Contributions & Responsibilities (2x2 Bento Grid) -->
+                <div class="space-y-2">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                        <i data-lucide="cpu" class="w-3.5 h-3.5 text-yellow-400"></i>
+                        Üstlendiğim Görevler & Mimari Katkılar
+                    </span>
+                    <div id="proj-modal-contributions" class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                        <!-- Injected dynamically as 2x2 grid -->
+                    </div>
+                </div>
+
+                <!-- 3. Tech Stack -->
+                <div class="space-y-2">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                        <i data-lucide="layers" class="w-3.5 h-3.5 text-yellow-400"></i>
+                        Kullanılan Teknolojiler & Araçlar
+                    </span>
+                    <div id="proj-modal-tech" class="flex flex-wrap gap-2 pt-0.5">
+                        <!-- Injected dynamically with logos -->
+                    </div>
+                </div>
+
+                <!-- 4. Technical Standards & Guarantees -->
+                <div class="space-y-2">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-yellow-400"></i>
+                        Teknik Standartlar & Mimari Güvenceler
+                    </span>
+                    <div id="proj-modal-metrics" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+                        <!-- Injected dynamically with technical standards -->
+                    </div>
+                </div>
+
+                <!-- 5. Architecture & Standards Note -->
+                <div class="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center gap-2.5 text-xs text-gray-400">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-yellow-400 flex-shrink-0"></i>
+                    <span>Üretim ortamı standartlarına ve kurumsal yüksek performans mimarisine uygun olarak geliştirilmiştir.</span>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/5 relative z-10">
+                <button id="close-project-modal-btn" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-xs font-semibold transition-all border border-white/5 cursor-pointer">
+                    Kapat
+                </button>
+                <a href="#iletisim" id="proj-modal-contact-btn" class="px-5 py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black text-xs font-bold transition-all shadow-lg shadow-yellow-400/20 flex items-center gap-1.5">
+                    <span>Projeyi Görüşelim</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script src="main.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

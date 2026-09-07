@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proje Detay Modalı Tasarımı</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= CSS DEĞİŞKENLERİ & TEMA AYARLARI ================= */
+        :root {
+            /* Vurgu Rengi: Modern Kurumsal Kobalt Mavi */
+            --accent: #2563EB;
+            --accent-hover: #1D4ED8;
+            --accent-light: #EFF6FF;
+            --accent-border: #BFDBFE;
+            --accent-text: #1D4ED8;
+            
+            /* Metin & Zemin Renkleri */
+            --bg-modal: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --text-light: #475569;
+            --border-subtle: #E2E8F0;
+            --bg-surface: #F8FAFC;
+        }
+
+        /* Tema Renk Ön Ayarları */
+        [data-theme="blue"] {
+            --accent: #2563EB;
+            --accent-hover: #1D4ED8;
+            --accent-light: #EFF6FF;
+            --accent-border: #BFDBFE;
+            --accent-text: #1D4ED8;
+        }
+        [data-theme="amber"] {
+            --accent: #D97706;
+            --accent-hover: #B45309;
+            --accent-light: #FFFBEB;
+            --accent-border: #FDE68A;
+            --accent-text: #B45309;
+        }
+        [data-theme="emerald"] {
+            --accent: #059669;
+            --accent-hover: #047857;
+            --accent-light: #ECFDF5;
+            --accent-border: #A7F3D0;
+            --accent-text: #047857;
+        }
+        [data-theme="indigo"] {
+            --accent: #4F46E5;
+            --accent-hover: #4338CA;
+            --accent-light: #EEF2FF;
+            --accent-border: #C7D2FE;
+            --accent-text: #4338CA;
+        }
+
+        /* ================= RESET & GENEL ================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #090A0F;
+            min-height: 100vh;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        /* Demo Arka Plan Efekti */
+        .demo-background-pattern {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Demo Kontrol Çubuğu */
+        .demo-controls {
+            position: fixed;
+            top: 1.25rem;
+            z-index: 100;
+            background: rgba(24, 24, 27, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .demo-controls span {
+            color: #94A3B8;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .color-dot {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .color-dot:hover {
+            transform: scale(1.15);
+        }
+        .color-dot.active {
+            border-color: #FFFFFF;
+            transform: scale(1.1);
+        }
+        .color-dot.blue { background: #2563EB; }
+        .color-dot.amber { background: #D97706; }
+        .color-dot.emerald { background: #059669; }
+        .color-dot.indigo { background: #4F46E5; }
+
+        .demo-open-btn {
+            background: #FFFFFF;
+            color: #0F172A;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border: none;
+            border-radius: 9999px;
+            padding: 0.4rem 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-left: 0.5rem;
+        }
+        .demo-open-btn:hover {
+            background: #E2E8F0;
+        }
+
+        /* ================= MODAL BACKDROP (ARKA PLAN BLUR) ================= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* ================= MODAL KARTI (MAX-WIDTH: 720PX, BEYAZ ZEMİN) ================= */
+        .modal-card {
+            background: var(--bg-modal);
+            width: 100%;
+            max-width: 720px;
+            max-height: 90vh;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.06);
+            overflow-y: auto;
+            position: relative;
+            padding: 2.5rem;
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--text-dark);
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-subtle) transparent;
+        }
+
+        .modal-card::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-card::-webkit-scrollbar-thumb {
+            background-color: var(--border-subtle);
+            border-radius: 9999px;
+        }
+
+        /* Fade-in Animasyonu */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* ================= SAĞ ÜST KAPATMA BUTONU (✕) ================= */
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 9999px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .close-btn:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+            border-color: var(--accent-border);
+            transform: rotate(90deg);
+        }
+
+        /* ================= PROJE BAŞLIĞI & ALT BAŞLIK ================= */
+        .modal-header {
+            margin-bottom: 2rem;
+            padding-right: 2.5rem;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            background: var(--accent-light);
+            color: var(--accent-text);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--accent-border);
+        }
+
+        .project-title {
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: #0F172A;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        /* ================= BÖLÜM BAŞLIKLARI (KÜÇÜK, KALIN, VURGU RENGİ, ALTI ÇİZGİLİ) ================= */
+        .section-block {
+            margin-bottom: 1.75rem;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 0.3rem;
+            margin-bottom: 0.85rem;
+        }
+
+        /* ================= BÖLÜM 1: PROJE KAPSAMI & AMACI ================= */
+        .scope-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 1.25rem 1.4rem;
+            font-size: 0.925rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            transition: border-color 0.2s;
+        }
+
+        .scope-card:hover {
+            border-color: var(--accent-border);
+        }
+
+        /* ================= BÖLÜM 2: ÜSTLENDİĞİM GÖREVLER (▹ SİMGESİ & SOL KENAR BOŞLUĞU) ================= */
+        .tasks-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .tasks-list li {
+            position: relative;
+            padding: 0.85rem 1.1rem 0.85rem 2.25rem;
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.85rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #334155;
+            transition: all 0.2s ease;
+        }
+
+        /* "▹" Simgesi ve Sol Kenar Boşluğu */
+        .tasks-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0.9rem;
+            top: 0.85rem;
+            color: var(--accent);
+            font-size: 1.15rem;
+            line-height: 1;
+            font-weight: 900;
+            transition: transform 0.2s ease;
+        }
+
+        .tasks-list li:hover {
+            border-color: var(--accent-border);
+            background: var(--accent-light);
+            transform: translateX(4px);
+        }
+
+        .tasks-list li:hover::before {
+            transform: translateX(2px);
+        }
+
+        /* ================= BÖLÜM 3: TEKNOLOJİ ETİKETLERİ (YUVARLAK, VURGU TONLARINDA) ================= */
+        .tech-tags-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+
+        .tech-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.45rem 1.05rem;
+            border-radius: 9999px;
+            background: var(--accent-light);
+            color: var(--accent-text);
+            border: 1px solid var(--accent-border);
+            font-size: 0.825rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .tech-pill:hover {
+            background: var(--accent);
+            color: #FFFFFF;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        /* ================= METRİKLER (GÖLGELİ, BÜYÜK SAYI 3rem, YAN YANA) ================= */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-top: 0.25rem;
+        }
+
+        .metric-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: 1.25rem;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px -4px rgba(37, 99, 235, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-color: var(--accent-border);
+        }
+
+        .metric-card:hover::before {
+            opacity: 1;
+        }
+
+        /* 3rem Büyük Sayı */
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.4rem;
+            font-feature-settings: "tnum";
+        }
+
+        .metric-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-desc {
+            font-size: 0.775rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ================= ALT METİN (KAPANIŞ CÜMLESİ) ================= */
+        .closing-banner {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-top: 1.75rem;
+        }
+
+        .closing-badge-icon {
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 0.5rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+
+        /* ================= MOBİL UYUMLULUK (768px Altında Metrikler Alt Alta) ================= */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.75rem;
+            }
+
+            .modal-card {
+                padding: 1.5rem 1.25rem;
+                border-radius: 1.25rem;
+                max-height: 94vh;
+            }
+
+            .close-btn {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .project-title {
+                font-size: 1.4rem;
+            }
+
+            .project-subtitle {
+                font-size: 0.85rem;
+            }
+
+            /* 768px Altında Metrikler Alt Alta */
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 0.85rem;
+            }
+
+            .metric-card {
+                padding: 1.25rem 1rem;
+            }
+
+            .metric-number {
+                font-size: 2.5rem;
+            }
+
+            .tasks-list li {
+                font-size: 0.85rem;
+                padding: 0.75rem 0.9rem 0.75rem 2rem;
+            }
+
+            .demo-controls {
+                top: auto;
+                bottom: 1rem;
+                max-width: calc(100% - 1.5rem);
+            }
+        }
+    </style>
+</head>
+<body data-theme="blue">
+
+    <!-- Arka plan desen -->
+    <div class="demo-background-pattern"></div>
+
+    <!-- Demo Üst Kontrol Çubuğu -->
+    <div class="demo-controls">
+        <span>Vurgu Rengi:</span>
+        <div class="color-dot blue active" onclick="setTheme('blue')" title="Kobalt Mavi"></div>
+        <div class="color-dot amber" onclick="setTheme('amber')" title="Amber / Sarı"></div>
+        <div class="color-dot emerald" onclick="setTheme('emerald')" title="Zümrüt Yeşili"></div>
+        <div class="color-dot indigo" onclick="setTheme('indigo')" title="İndigo Mor"></div>
+        <button type="button" class="demo-open-btn" onclick="openModal()">Modali Aç</button>
+    </div>
+
+    <!-- ================= MODAL BACKDROP ================= -->
+    <div id="project-modal-backdrop" class="modal-overlay">
+        
+        <!-- ================= MODAL KARTI ================= -->
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            
+            <!-- Sağ Üst Kapatma Butonu (✕) -->
+            <button type="button" class="close-btn" onclick="closeModal()" aria-label="Kapat" title="Kapat">
+                ✕
+            </button>
+
+            <!-- PROJE BAŞLIĞI & PROJE ALT BAŞLIĞI -->
+            <div class="modal-header">
+                <div class="header-badge">
+                    <span>Veritabanı & Kurumsal Portal</span>
+                </div>
+                <h2 id="modal-title" class="project-title">Sözleşme ve Lisans Takip Portalı</h2>
+                <p class="project-subtitle">Kurumsal Sözleşme, Lisans Süreleri & İlişkisel Veritabanı Mimarisi</p>
+            </div>
+
+            <!-- BÖLÜM 1 - PROJE KAPSAMI & AMACI -->
+            <div class="section-block">
+                <h3 class="section-title">BÖLÜM 1 - PROJE KAPSAMI & AMACI:</h3>
+                <div class="scope-card">
+                    Kurum bünyesinde kullanılan yazılım lisansları, tedarikçi sözleşmeleri ve kurumsal anlaşmaların süre bitimlerini, yenileme tarihlerini ve maliyetlerini merkezi olarak yönetmeyi sağlayan kurumsal bir portal geliştirildi. Projede ilişkisel veritabanı tasarımı, veri modelleme ve portal entegrasyon çalışmalarında kritik görevler üstlenildi.
+                </div>
+            </div>
+
+            <!-- BÖLÜM 2 - ÜSTLENDİĞİM GÖREVLER & KATKILARIM -->
+            <div class="section-block">
+                <h3 class="section-title">BÖLÜM 2 - ÜSTLENDİĞİM GÖREVLER & KATKILARIM:</h3>
+                <ul class="tasks-list">
+                    <li>Sözleşme ve lisans yaşam döngüsünü temsil eden çok tablolu ilişkisel veritabanı şemasının (MS SQL) tasarlanması</li>
+                    <li>Veri bütünlüğünü (referential integrity) ve normalizasyon kurallarını garanti altına alan yapı</li>
+                    <li>Sözleşme bitiş tarihleri öncesinde otomatik uyarı mekanizmaları için gerekli veri ve sorgu altyapısı</li>
+                    <li>Yönetim portalı backend servisleri ile veritabanı arasındaki CRUD ve raporlama sorgularının entegrasyonu</li>
+                </ul>
+            </div>
+
+            <!-- BÖLÜM 3 - KULLANILAN TEKNOLOJİLER & MİMARİ -->
+            <div class="section-block">
+                <h3 class="section-title">BÖLÜM 3 - KULLANILAN TEKNOLOJİLER & MİMARİ:</h3>
+                <div class="tech-tags-wrapper">
+                    <span class="tech-pill">MS SQL Server</span>
+                    <span class="tech-pill">Veritabanı Modelleme (ER)</span>
+                    <span class="tech-pill">T-SQL</span>
+                    <span class="tech-pill">Yönetim Portalı</span>
+                    <span class="tech-pill">Veri Entegrasyonu</span>
+                    <span class="tech-pill">Optimizasyon</span>
+                </div>
+            </div>
+
+            <!-- METRİKLER (2 ADET - GÖLGELİ, 3rem BÜYÜK SAYI, YAN YANA) -->
+            <div class="section-block">
+                <h3 class="section-title">METRİKLER (2 ADET):</h3>
+                <div class="metrics-grid">
+                    <!-- Metrik 1 -->
+                    <div class="metric-card">
+                        <div class="metric-number">%85</div>
+                        <div class="metric-name">Süreç Hızı</div>
+                        <div class="metric-desc">Operasyonel işlem süresi & manuel takip optimizasyonu</div>
+                    </div>
+                    <!-- Metrik 2 -->
+                    <div class="metric-card">
+                        <div class="metric-number">%100</div>
+                        <div class="metric-name">Veri Tutarlılığı</div>
+                        <div class="metric-desc">İlişkisel bütünlük ve sıfır veri kaybı güvencesi</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALT METİN (KAPANIŞ CÜMLESİ) -->
+            <div class="closing-banner">
+                <div class="closing-badge-icon">✓</div>
+                <span>Üretim ortamı standartlarına ve yüksek performans mimarisine uygun olarak geliştirilmiştir.</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        const backdrop = document.getElementById('project-modal-backdrop');
+
+        function openModal() {
+            if (!backdrop) return;
+            backdrop.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            if (!backdrop) return;
+            backdrop.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Dışarıya (Backdrop) tıklayınca kapatma
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) {
+                closeModal();
+            }
+        });
+
+        // ESC tuşu ile kapatma
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !backdrop.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Vurgu Rengi Değiştirici
+        function setTheme(themeName) {
+            document.body.setAttribute('data-theme', themeName);
+            document.querySelectorAll('.color-dot').forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.classList.contains(themeName)) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

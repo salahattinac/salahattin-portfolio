@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 1. Profil, Deneyim ve Genel İçerikler
+    // Ziyaretçiler okuyabilir, yalnızca giriş yapmış Admin güncelleyebilir
+    match /content/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // 2. Yetenekler Koleksiyonu
+    // Herkes okuyabilir, yalnızca Admin ekleyebilir/silebilir/düzenleyebilir
+    match /skills/{skillId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // 3. Projeler Koleksiyonu
+    // Herkes okuyabilir, yalnızca Admin ekleyebilir/silebilir/düzenleyebilir
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // 4. İletişim Mesajları
+    // Ziyaretçiler iletişim formundan mesaj gönderebilir (create)
+    // Sadece Admin gelen mesajları okuyabilir, silebilir ve güncelleyebilir (read, update, delete)
+    match /messages/{messageId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Diğer tüm yollar varsayılan olarak kapalıdır
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

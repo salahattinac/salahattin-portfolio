@@ -1,0 +1,296 @@
+/* Universal Typography: Plus Jakarta Sans */
+*, *::before, *::after {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* Fullpage Smooth Scrolling & Section Docking */
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+}
+
+.snap-section {
+    scroll-snap-align: start;
+    transform: translateZ(0);
+}
+
+/* Glass Bento Card */
+.glass-card {
+    background: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+}
+
+.glass-card:hover {
+    border-color: rgba(250, 204, 21, 0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -15px rgba(250, 204, 21, 0.15), 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+}
+
+/* Tech Pill Badges */
+.tech-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.6rem;
+    font-size: 0.75rem;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.tech-pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1f2937;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #374151;
+}
+
+/* ================= INFINITE MARQUEE ANIMATION FOR TECH LOGOS ================= */
+.marquee-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding: 0.5rem 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1.25rem;
+    animation: marquee-scroll 30s linear infinite;
+    will-change: transform;
+}
+
+.marquee-track-reverse {
+    display: flex;
+    width: max-content;
+    gap: 1.25rem;
+    animation: marquee-scroll-reverse 32s linear infinite;
+    will-change: transform;
+}
+
+.marquee-container:hover .marquee-track,
+.marquee-container:hover .marquee-track-reverse {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@keyframes marquee-scroll-reverse {
+    0% {
+        transform: translate3d(-50%, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Tech Logo Card */
+.tech-logo-card {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1.4rem;
+    background: rgba(18, 18, 24, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+}
+
+.tech-logo-card:hover {
+    transform: translateY(-4px) scale(1.05) rotate(-1deg);
+    border-color: rgba(250, 204, 21, 0.45);
+    background: rgba(28, 28, 36, 0.95);
+    box-shadow: 0 12px 28px -8px rgba(250, 204, 21, 0.2), 0 0 0 1px rgba(250, 204, 21, 0.25);
+}
+
+.tech-logo-card:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.tech-logo-card:hover .tech-icon {
+    transform: rotate(8deg) scale(1.12);
+}
+
+.tech-icon {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+/* ================= EXPERTISE BOX ================= */
+.expertise-box {
+    background: rgba(14, 18, 25, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expertise-box:hover {
+    background: rgba(20, 25, 36, 0.85);
+}
+
+/* ================= PROJECT CARD ================= */
+.project-card {
+    background: rgba(14, 18, 25, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+    background: rgba(20, 25, 36, 0.85);
+    border-color: rgba(250, 204, 21, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(250, 204, 21, 0.12), 0 10px 25px -10px rgba(0, 0, 0, 0.8);
+}
+
+/* ================= PROJECT SHOWCASE TABS & CARD ================= */
+.project-tab-btn {
+    background: rgba(14, 18, 25, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 4px solid transparent;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.project-tab-btn:hover {
+    background: rgba(24, 28, 38, 0.85);
+    border-color: rgba(250, 204, 21, 0.3);
+    border-left-color: rgba(250, 204, 21, 0.3);
+}
+
+.project-tab-btn.active {
+    background: linear-gradient(90deg, rgba(250, 204, 21, 0.14), rgba(18, 18, 24, 0.85));
+    border-color: rgba(250, 204, 21, 0.5);
+    border-left: 4px solid #facc15;
+    box-shadow: 0 10px 30px -10px rgba(250, 204, 21, 0.2);
+}
+
+.project-tab-btn.active .tab-icon-box {
+    background: rgba(250, 204, 21, 0.15);
+    border-color: rgba(250, 204, 21, 0.4);
+}
+
+.project-tab-btn.active .tab-arrow {
+    color: #facc15;
+    transform: translateX(4px);
+}
+
+#showcase-card {
+    min-height: 480px;
+}
+
+@media (min-width: 1024px) {
+    #showcase-card,
+    #project-tabs-container {
+        height: 480px !important;
+        max-height: 480px !important;
+    }
+}
+
+/* ================= SHOWCASE TECH MARQUEE (DÖNEN & LOGOLU) ================= */
+.showcase-tech-marquee-container {
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.showcase-tech-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 0.65rem;
+    animation: showcase-tech-marquee 20s linear infinite;
+    will-change: transform;
+}
+
+.showcase-tech-marquee-container:hover .showcase-tech-marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes showcase-tech-marquee {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+.showcase-tech-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    white-space: nowrap;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.showcase-tech-badge:hover {
+    background: rgba(250, 204, 21, 0.14);
+    border-color: rgba(250, 204, 21, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px -4px rgba(250, 204, 21, 0.25);
+}
+
+.showcase-tech-badge .tech-badge-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    flex-shrink: 0;
+}
+
+.showcase-tech-badge:hover .tech-badge-icon {
+    transform: rotate(12deg) scale(1.2);
+}
+
+
+

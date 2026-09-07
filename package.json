@@ -1,0 +1,20 @@
+{
+  "name": "salahattin-portfolio",
+  "version": "1.0.0",
+  "description": "Salahattin Açıkgöz — Portföy & Admin Yönetim Sistemi (Firebase)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "migrate": "node scripts/migrate-to-firestore.js",
+    "deploy": "npx firebase deploy",
+    "deploy:hosting": "npx firebase deploy --only hosting",
+    "deploy:firestore": "npx firebase deploy --only firestore"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0",
+    "dotenv": "^16.4.5"
+  },
+  "keywords": ["portfolio", "firebase", "firestore", "uipath", "developer"],
+  "author": "Salahattin Açıkgöz",
+  "license": "ISC"
+}

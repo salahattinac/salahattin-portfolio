@@ -1,0 +1,8 @@
+node_modules/
+serviceAccountKey*.json
+firebase-service-account*.json
+.env
+.firebase/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
