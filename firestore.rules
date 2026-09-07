@@ -2,36 +2,48 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // Yalnızca yetkili yönetici (Salahattin Açıkgöz)
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'lsalahattinl@gmail.com';
+    }
+
     // 1. Profil, Deneyim ve Genel İçerikler
-    // Ziyaretçiler okuyabilir, yalnızca giriş yapmış Admin güncelleyebilir
+    // Ziyaretçiler okuyabilir, yalnızca Admin güncelleyebilir
     match /content/{docId} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
 
     // 2. Yetenekler Koleksiyonu
     // Herkes okuyabilir, yalnızca Admin ekleyebilir/silebilir/düzenleyebilir
     match /skills/{skillId} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
 
     // 3. Projeler Koleksiyonu
     // Herkes okuyabilir, yalnızca Admin ekleyebilir/silebilir/düzenleyebilir
     match /projects/{projectId} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
 
     // 4. İletişim Mesajları
-    // Ziyaretçiler iletişim formundan mesaj gönderebilir (create)
-    // Sadece Admin gelen mesajları okuyabilir, silebilir ve güncelleyebilir (read, update, delete)
+    // Ziyaretçiler yalnızca form üzerinden kontrollü yeni mesaj ekleyebilir (create)
+    // Mesajları yalnızca Admin okuyabilir, silebilir ve güncelleyebilir
     match /messages/{messageId} {
-      allow create: if true;
-      allow read, update, delete: if request.auth != null;
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() >= 2
+                    && request.resource.data.name.size() <= 100
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() <= 150
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() >= 2
+                    && request.resource.data.message.size() <= 4000;
+      allow read, update, delete: if isAdmin();
     }
 
-    // Diğer tüm yollar varsayılan olarak kapalıdır
+    // Diğer tüm yollar ve koleksiyonlar varsayılan olarak kesinlikle kapalıdır
     match /{document=**} {
       allow read, write: if false;
     }
