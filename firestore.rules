@@ -4,7 +4,7 @@ service cloud.firestore {
 
     // Yalnızca yetkili yönetici (Salahattin Açıkgöz)
     function isAdmin() {
-      return request.auth != null && request.auth.token.email == 'lsalahattinl@gmail.com';
+      return request.auth != null && request.auth.token.email == 'xxxxxx@gmail.com';
     }
 
     // 1. Profil, Deneyim ve Genel İçerikler
